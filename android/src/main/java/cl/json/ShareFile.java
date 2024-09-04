@@ -128,7 +128,13 @@ public class ShareFile {
                 if (!dir.exists() && !dir.mkdirs()) {
                     throw new IOException("mkdirs failed on " + dir.getAbsolutePath());
                 }
-                File file = new File(dir, filename + "." + extension);
+                String name = filename;
+
+                if(extension != null) {
+                   name = filename + "." + extension;
+                }
+
+                File file = new File(dir, name);
                 final FileOutputStream fos = new FileOutputStream(file);
                 fos.write(Base64.decode(encodedImg, Base64.DEFAULT));
                 fos.flush();
